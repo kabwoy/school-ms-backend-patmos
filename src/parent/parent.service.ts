@@ -20,7 +20,7 @@ export class ParentService {
   }
 
   findOne(id: number) {
-    return this.parentRepo.findOne({where:{id}})
+    return this.parentRepo.findOne({where:{id} , relations:['student']})
   }
 
   update(id: number, updateBody: UpdateParentDto) {

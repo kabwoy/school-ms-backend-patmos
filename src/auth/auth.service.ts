@@ -5,6 +5,7 @@ import { AuthDto } from './dto/auth.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt'
+import { first } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -13,10 +14,11 @@ export class AuthService {
 
     async login(body:AuthDto){
 
-        const user = await this.parentService.findbyIdNo(body.username)
-        if(!user) throw new BadRequestException('Invalid Username')
+        const user = await this.parentService.findbyIdNo(body.password)
+        if(!user) throw new BadRequestException('No user Found')
+        if(body.username !== user.contact) throw new BadRequestException('invalid username')
         if(body.password !== user.id_number) throw new BadRequestException('Invalid Password')
-        return this.jwtService.sign({id:user.id , id_number:user.id_number , first_name:user.first_name})
+        return {token:this.jwtService.sign({id:user.id , id_number:user.id_number , first_name:user.first_name}) , first_name:user.first_name , id:user.id}
         
     }
 
@@ -26,7 +28,7 @@ export class AuthService {
         const matchedPassword = await bcrypt.compare(body.password , user.password)
         if(!matchedPassword) throw new BadRequestException("wrong password , Please try again")
         // if(body.password !== user.password) throw new BadRequestException("invalid Password!! please check your password or contact the admin")
-        return {token: this.jwtService.sign({user_id:user.id , role:user.role , email:user.email})}
+        return {token: this.jwtService.sign({user_id:user.id , role:user.role , email:user.email}), role:user.role}
         
         
     }

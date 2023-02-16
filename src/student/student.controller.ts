@@ -22,7 +22,7 @@ import { StudentService } from './student.service';
 @UseGuards(JwtGuard)
 export class StudentController {
   constructor(private studentService: StudentService) {}
-  @Role(Roles.USER)
+  @Role(Roles.ADMIN)
   @UseGuards(RolesGuard)
   @Get()
   findAll() {

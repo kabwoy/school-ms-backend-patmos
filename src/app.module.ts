@@ -22,6 +22,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtGuard } from './auth/jwt-auth.guard';
 import { TeacherModule } from './teacher/teacher.module';
 import { Teacher } from './teacher/entities/teacher.entity';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -34,7 +35,7 @@ import { Teacher } from './teacher/entities/teacher.entity';
     entities:[Parent , Grade , Student , Subject , Exam , ExamEntry , User , Teacher],
     autoLoadEntities:true,
     synchronize:true
-  }), ParentModule, GradeModule, StudentModule, AuthModule, SubjectModule, ExamModule, ExamentryModule, UserModule, TeacherModule],
+  }), ParentModule, GradeModule, StudentModule, AuthModule, SubjectModule, ExamModule, ExamentryModule, UserModule, TeacherModule, ProfileModule],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],
 })
