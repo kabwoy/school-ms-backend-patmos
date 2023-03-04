@@ -1,7 +1,7 @@
 import { Exam } from "src/exam/entities/exam.entity";
 import { Student } from "src/student/entity/student.entity";
 import { Subject } from "src/subject/entities/subject.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 
 @Entity()
@@ -12,9 +12,13 @@ export class ExamEntry {
     subject:Subject
     @ManyToOne(type=>Student , (student)=>student.exams , {onDelete:'CASCADE'})
     student:Student
-    @ManyToOne(type=>Exam , (exam)=>exam.exams , {onDelete:'CASCADE'})
+    @ManyToOne(type=>Exam , (exam)=>exam.exams)
     exam:Exam
     @Column()
     score:number
+    @CreateDateColumn()
+    created_at:Date;
+    @UpdateDateColumn()
+    updated_at:Date;
 
 }

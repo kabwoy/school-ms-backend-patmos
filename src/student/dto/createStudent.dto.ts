@@ -1,4 +1,5 @@
 import { IsDate, IsDateString, IsNumber, IsString } from "class-validator"
+import { Classes } from "src/classes/entities/class.entity"
 import { Grade } from "src/grade/entity/grade.entity"
 import { Parent } from "src/parent/entity/parent.entity"
 
@@ -14,6 +15,6 @@ export class CreateStudentDto{
     grade:Grade
     @IsNumber()
     parent:Parent
-    @IsString()
-    class_name:string
+    @IsNumber()
+    class_name:Classes
 }

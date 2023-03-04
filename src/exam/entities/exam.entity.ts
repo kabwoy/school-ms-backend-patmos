@@ -1,5 +1,5 @@
 import { ExamEntry } from "src/examentry/entities/examentry.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Exam {
@@ -7,6 +7,6 @@ export class Exam {
     id:number
     @Column()
     type:string
-    @OneToMany(type=>ExamEntry , (exams)=>exams.exam)
+    @OneToMany(type=>ExamEntry , (exams)=>exams.exam  , {onDelete:'CASCADE'})
     exams:ExamEntry
 }

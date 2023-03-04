@@ -35,7 +35,6 @@ export class GradeController {
     return this.gradeService.create(body);
   }
   @Get(':id')
-  @Role(Roles.ADMIN)
   @UseGuards(RolesGuard)
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.gradeService.findOne(id);

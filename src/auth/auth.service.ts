@@ -27,8 +27,9 @@ export class AuthService {
         if(!user) throw new BadRequestException("invalid email!! please check your email or contact the admin")
         const matchedPassword = await bcrypt.compare(body.password , user.password)
         if(!matchedPassword) throw new BadRequestException("wrong password , Please try again")
+        const username = user.email.split('@')[0]
         // if(body.password !== user.password) throw new BadRequestException("invalid Password!! please check your password or contact the admin")
-        return {token: this.jwtService.sign({user_id:user.id , role:user.role , email:user.email}), role:user.role}
+        return {token: this.jwtService.sign({user_id:user.id , role:user.role , email:user.email}), role:user.role , username:username }
         
         
     }

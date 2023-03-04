@@ -13,7 +13,7 @@ export class SubjectService {
   }
 
   findAll() {
-    return this.subjectRepo.find();
+    return this.subjectRepo.find({relations:['grade']});
   }
 
   findOne(id: number) {

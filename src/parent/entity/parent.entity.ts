@@ -14,6 +14,6 @@ export class Parent {
   id_number: string;
   @Column({nullable:false})
   address: string;
-  @OneToMany(type=>Student , (student)=>student.parent)
+  @OneToMany(type=>Student , (student)=>student.parent , {onDelete:'CASCADE' , onUpdate:'CASCADE'})
   student:Student
 }

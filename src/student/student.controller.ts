@@ -30,6 +30,12 @@ export class StudentController {
   }
   @Role(Roles.ADMIN)
   @UseGuards(RolesGuard)
+  @Get('/filter/:id')
+  filterStudentsByGrade(@Param('id' , ParseIntPipe) id:number){
+    return this.studentService.filterStudents(id)
+  }
+  @Role(Roles.ADMIN)
+  @UseGuards(RolesGuard)
   @Post()
   create(@Body() body:CreateStudentDto) {
     

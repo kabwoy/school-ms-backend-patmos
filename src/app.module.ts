@@ -23,6 +23,8 @@ import { JwtGuard } from './auth/jwt-auth.guard';
 import { TeacherModule } from './teacher/teacher.module';
 import { Teacher } from './teacher/entities/teacher.entity';
 import { ProfileModule } from './profile/profile.module';
+import { ClassesModule } from './classes/classes.module';
+import { Classes } from './classes/entities/class.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -32,10 +34,14 @@ import { ProfileModule } from './profile/profile.module';
     password:'',
     host:"localhost",
     database:'patmos',
-    entities:[Parent , Grade , Student , Subject , Exam , ExamEntry , User , Teacher],
+    entities:[Parent , Grade , Student , Subject , Exam , ExamEntry , User , Teacher, Classes],
     autoLoadEntities:true,
     synchronize:true
-  }), ParentModule, GradeModule, StudentModule, AuthModule, SubjectModule, ExamModule, ExamentryModule, UserModule, TeacherModule, ProfileModule],
+  }), ParentModule, GradeModule, StudentModule, 
+  AuthModule, SubjectModule, ExamModule,
+   ExamentryModule, UserModule, 
+   TeacherModule, ProfileModule, 
+   ClassesModule],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],
 })

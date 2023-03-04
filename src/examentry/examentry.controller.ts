@@ -8,7 +8,7 @@ import { Roles } from 'src/user/enums/roles.enum';
 import { Role } from 'src/auth/decorators/roles.decorator';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 
-@Controller('entry')
+@Controller('exam-entry')
 @UseGuards(JwtGuard)
 export class ExamentryController {
   constructor(private readonly examentryService: ExamentryService) {}
@@ -17,6 +17,8 @@ export class ExamentryController {
   @Role(Roles.ADMIN)
   @UseGuards(RolesGuard)
   create(@Body() createExamentryDto: CreateExamentryDto) {
+    console.log(createExamentryDto);
+    
     return this.examentryService.create(createExamentryDto);
   }
 

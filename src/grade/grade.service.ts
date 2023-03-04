@@ -11,8 +11,7 @@ export class GradeService {
 
   findAll() {
   
-    
-    return this.gradeRepo.find();
+    return this.gradeRepo.find({relations:['subject']});
   }
 
   create(gradeBody: CreateGradeDto) {
@@ -20,7 +19,7 @@ export class GradeService {
   }
 
   findOne(id: number) {
-    return this.gradeRepo.findOne({ where: { id } });
+    return this.gradeRepo.findOne({ where: { id } ,relations:['subject']});
   }
 
   update(id: number, gradeBody: UpdateGradeDto) {

@@ -11,13 +11,17 @@ export class StudentService {
     @InjectRepository(Student) private studentRepo: Repository<Student>,
   ) {}
   async findAll() {
-     return await this.studentRepo.find({relations:['grade' , 'parent']}); 
+     return await this.studentRepo.find({relations:['grade' , 'parent' , 'class_name']}); 
+  }
+  filterStudents(id:number){
+     return this.studentRepo.query(`SELECT * FROM student WHERE gradeId=${id}`)
+
   }
   create(studentBody: CreateStudentDto) {
     return this.studentRepo.save(studentBody);
   }
   findOne(id: number) {
-    return this.studentRepo.findOne({ where: { id } , relations:['grade' , 'parent']});
+    return this.studentRepo.findOne({ where: { id } , relations:['grade' , 'parent' ,'class_name']});
   }
   update(id: number, studentBody: UpdateStudentDto) {
     return this.studentRepo.update(id, studentBody);
